@@ -65,6 +65,7 @@ The backend uses **LangChain’s RetrievalQA** with **Ollama** as the LLM.
 
 ```bash
 python run_app.py
+```
 The script:
 
 Starts FastAPI with Uvicorn
@@ -75,22 +76,26 @@ Launches Streamlit
 
 🚀 Quickstart
 1. Clone the repo
-bash
+```bash
 git clone https://github.com/your-username/companyai.git
 cd companyai
+```
 2. Create virtual environment & install dependencies
-bash
+```bash
 python -m venv .venv
 source .venv/bin/activate   # Linux/Mac
 .venv\Scripts\activate      # Windows
-
+```
+```bash
 pip install -r requirements.txt
+```
 3. Add your documents
 Put your company PDFs inside the data/ folder.
 
 4. Run the assistant
-bash
+```bash
 python run_app.py
+```
 5. Ask questions
 Example queries:
 
@@ -148,5 +153,6 @@ Database: SQLite
 📑 Support for more file formats (Word, Excel, CSV)
 
 📊 Dashboard view with charts & KPIs
+
 
 ☁ Deployment with Docker + Kubernetes
