@@ -1,8 +1,3 @@
-"""
-Streamlit-based frontend for the Enterprise Document Q&A Assistant.
-Backend is started separately (e.g., via run_app.py).
-"""
-
 import streamlit as st
 import requests
 import pandas as pd
@@ -12,8 +7,8 @@ from io import BytesIO
 # Backend configuration
 # ---------------------------
 FASTAPI_HOST = "0.0.0.0"
-FASTAPI_PORT = 8000   # ✅ Backend runs here
-SERVER_IP = "192.168.0.230"  # LAN IP for coworkers
+FASTAPI_PORT = 8000   
+SERVER_IP = "192.168.0.230"
 BACKEND_URL = f"http://{SERVER_IP}:{FASTAPI_PORT}"
 
 
@@ -106,11 +101,11 @@ def main():
 
                 else:
                     err = f"Error {response.status_code}: {response.text}"
-                    placeholder.markdown(f"❌ {err}")
+                    placeholder.markdown(f"{err}")
                     st.session_state.messages.append({"role": "assistant", "content": err})
 
             except Exception as e:
-                placeholder.markdown(f"❌ Error: {e}")
+                placeholder.markdown(f"Error: {e}")
                 st.session_state.messages.append({"role": "assistant", "content": str(e)})
 
 
@@ -119,3 +114,4 @@ def main():
 # ---------------------------
 if __name__ == "__main__":
     main()
+
