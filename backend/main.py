@@ -1,8 +1,3 @@
-"""
-Main FastAPI application for the Enterprise Document Q&A Assistant.
-This file sets up the API endpoints and integrates with the RAG pipeline.
-"""
-
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Optional
@@ -97,7 +92,7 @@ async def handle_query(request: QueryRequest):
             "structured_data": None
         }
 
-        # ✅ Example: if query_documents attaches structured JSON, pass it through
+        # Example: if query_documents attaches structured JSON, pass it through
         if "structured_data" in result and result["structured_data"]:
             response["structured_data"] = [
                 StructuredItem(**item) for item in result["structured_data"]
@@ -116,3 +111,4 @@ async def handle_query(request: QueryRequest):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
