@@ -39,11 +39,11 @@ def wait_for_backend(url, timeout=180):
         try:
             r = requests.get(url, timeout=5)
             if r.status_code == 200:
-                print("✅ Backend is ready.")
+                print("Backend is ready.")
                 return
         except requests.RequestException:
             pass
-        print("⏳ Waiting for backend to start...")
+        print("Waiting for backend to start...")
         time.sleep(5)
     raise TimeoutError("Backend did not start in time.")
 
@@ -52,7 +52,7 @@ def run():
     """Start backend and then Streamlit frontend."""
     start_backend()
     try:
-        wait_for_backend(f"{BACKEND_URL}/")  # hit FastAPI root
+        wait_for_backend(f"{BACKEND_URL}/")
         subprocess.run([sys.executable, "-m", "streamlit", "run", "frontend/streamlit_app.py"], check=True)
     finally:
         stop_backend()
@@ -61,3 +61,4 @@ def run():
 if __name__ == "__main__":
     atexit.register(stop_backend)
     run()
+
