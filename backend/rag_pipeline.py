@@ -1,8 +1,3 @@
-"""
-RAG (Retrieval-Augmented Generation) pipeline implementation.
-This module handles document ingestion, embedding generation, and query processing.
-"""
-
 import os
 import json
 from typing import Dict, List, Any
@@ -21,7 +16,7 @@ import re
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 DATA_DIR = os.path.abspath(DATA_DIR)
 DB_PATH = "metadata.db"
-CHROMA_DIR = "chroma_store"  # folder where embeddings will be persisted
+CHROMA_DIR = "chroma_store" 
 
 
 def initialize_database():
@@ -50,7 +45,7 @@ def extract_metadata_from_filename(filename: str) -> Dict[str, str]:
 
     date = None
     for part in parts:
-        if '-' in part and len(part) == 10:  # Looks like YYYY-MM-DD
+        if '-' in part and len(part) == 10:
             date = part
             break
 
@@ -190,7 +185,7 @@ def initialize_rag_pipeline():
 
     prompt_template = setup_prompt_template()
 
-    llm = Ollama(model="phi3:mini")  # Change model name if you prefer
+    llm = Ollama(model="phi3:mini")
 
     qa_chain = RetrievalQA.from_chain_type(
         llm=llm,
@@ -223,7 +218,7 @@ def extract_answer_and_json(raw_text: str):
             try:
                 structured_data = json.loads(json_str)
             except Exception as e:
-                print(f"⚠️ Failed to parse structured data JSON: {e}")
+                print(f"Failed to parse structured data JSON: {e}")
     else:
         answer = raw_text.strip()
 
@@ -252,7 +247,7 @@ def query_documents(pipeline, question: str):
             if start != -1 and end != -1:
                 structured_data = json.loads(answer[start:end])
     except Exception as e:
-        print(f"⚠️ Could not parse structured JSON: {e}")
+        print(f"Could not parse structured JSON: {e}")
 
     if "source_documents" in result:
         for doc in result["source_documents"]:
@@ -264,3 +259,4 @@ def query_documents(pipeline, question: str):
             })
 
     return {"answer": answer, "sources": sources, "structured_data": structured_data}
+
